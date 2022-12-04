@@ -16,6 +16,11 @@ stages:
     steps:
     - bash: echo build firstjob
     - bash: echo variable $(pipelinevariable)
+    - bash: echo $(build.BuldNumber)
+    - bash: echo $(build.BuildId)
+    - bash: echo $(build.SourceBranchName)
+    - bash: echo $(build.SourcesDirectory)
+    - bash: echo $(build.DefaultWorkingDirectory)
   - job: secondjob
     steps:
     - bash: echo build secondjob
