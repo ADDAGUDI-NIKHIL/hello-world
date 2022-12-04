@@ -14,40 +14,43 @@ stages:
   jobs:
   - job: firstjob
     steps:
+    - bash: java -version
+    - bash: node --version
+    - bash: mvn --version 
     - bash: echo build firstjob
     - bash: echo variable $(pipelinevariable)
-    - bash: echo $(build.buldNumber)
+    - bash: echo $(build.buildNumber)
     - bash: echo $(build.buildId)
     - bash: echo $(build.SourceBranchName)
     - bash: echo $(build.SourcesDirectory)
     - bash: echo $(System.DefaultWorkingDirectory)
-  - job: secondjob
-    steps:
-    - bash: echo build secondjob
+#   - job: secondjob
+#     steps:
+#     - bash: echo build secondjob
 
-- stage: devdeploy
-  variables:
-    environment: Dev
-  dependsOn: build
-  jobs:
-  - job: devdeployjob
-    steps:
-    - bash: echo $(environment)deployjob
-- stage: Qadeploy
-  variables:
-    environment: Qa
-  dependsOn: devdeploy
-  jobs:
-  - job: Qadeploy
-    steps:
-    - bash: echo $(environment)deployjob
-- stage: proddeploy
-  variables:
-    environment: Prod
-  dependsOn:
-  - devdeploy
-  - Qadeploy
-  jobs:
-  - job: proddeployjob
-    steps:
-    - bash: echo $(environment)deployjob
+# - stage: devdeploy
+#   variables:
+#     environment: Dev
+#   dependsOn: build
+#   jobs:
+#   - job: devdeployjob
+#     steps:
+#     - bash: echo $(environment)deployjob
+# - stage: Qadeploy
+#   variables:
+#     environment: Qa
+#   dependsOn: devdeploy
+#   jobs:
+#   - job: Qadeploy
+#     steps:
+#     - bash: echo $(environment)deployjob
+# - stage: proddeploy
+#   variables:
+#     environment: Prod
+#   dependsOn:
+#   - devdeploy
+#   - Qadeploy
+#   jobs:
+#   - job: proddeployjob
+#     steps:
+#     - bash: echo $(environment)deployjob
