@@ -9,11 +9,28 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+- stage: build
+  jobs:
+  - job: firstjob
+    steps:
+    - bash: echo build firstjob
+  - job: secondjob
+    steps:
+    - bash: echo build secondjob
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- stage: devdeploy
+  jobs:
+  - job: devdeployjob
+    steps:
+    - bash: echo devdeployjob
+- stage: Qadeploy
+  jobs:
+  - job: Qadeploy
+    steps:
+    - bash: echo Qadeployjob
+- stage: proddeploy
+  jobs:
+  - job: proddeployjob
+    steps:
+    - bash: echo proddeployjob
