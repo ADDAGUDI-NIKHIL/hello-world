@@ -34,6 +34,11 @@ stages:
         Contents: '**/*'
         TargetFolder: '$(build.ArtifactStagingDirectory)'
     - bash: ls -R $(build.ArtifactStagingDirectory)
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
 #   - job: secondjob
 #     steps:
 #     - bash: echo build secondjob
