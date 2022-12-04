@@ -14,16 +14,26 @@ stages:
   jobs:
   - job: firstjob
     steps:
-    - bash: java -version
-    - bash: node --version
-    - bash: mvn --version 
-    - bash: echo build firstjob
-    - bash: echo variable $(pipelinevariable)
-    - bash: echo $(build.buildNumber)
-    - bash: echo $(build.buildId)
-    - bash: echo $(build.SourceBranchName)
-    - bash: echo $(build.SourcesDirectory)
+    # - bash: java -version
+    # - bash: node --version
+    # - bash: mvn --version 
+    # - bash: echo build firstjob
+    # - bash: echo variable $(pipelinevariable)
+    # - bash: echo $(build.buildNumber)
+    # - bash: echo $(build.buildId)
+    # - bash: echo $(build.SourceBranchName)
+    # - bash: echo $(build.SourcesDirectory)
     - bash: echo $(System.DefaultWorkingDirectory)
+    - bash: ls -R $(System.DefaultWorkingDirectory) 
+    - bash: echo $(build.ArtifactStagingDirectory)
+    - bash: ls -R $(build.ArtifactStagingDirectory)
+    - bash: ls -R $(build.ArtifactStagingDirectory)
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**/*'
+        TargetFolder: '$(build.ArtifactStagingDirectory)'
+    - bash: ls -R $(build.ArtifactStagingDirectory)
 #   - job: secondjob
 #     steps:
 #     - bash: echo build secondjob
